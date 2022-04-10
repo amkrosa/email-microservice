@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: io.amkrosa
+testFramework: junit
+sourceLanguage: kotlin
+buildTool: gradle_kotlin
+features: [annotation-api, app-name, assertj, data, data-jpa, gradle, http-client, jackson-databind, jdbc-hikari, junit, kafka, kotlin, kotlin-application, kotlin-build, kotlin-extension-functions, logback, micronaut-build, mockito, netty-server, openapi, postgres, problem-json, reactor, reactor-http-client, readme, security-annotations, security-jwt, shade, swagger-ui, testcontainers, yaml]
