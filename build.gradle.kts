@@ -1,8 +1,8 @@
 plugins {
-    id("org.jetbrains.kotlin.jvm") version "1.6.10"
-    id("org.jetbrains.kotlin.kapt") version "1.6.10"
+    id("org.jetbrains.kotlin.jvm") version "1.6.20"
+    id("org.jetbrains.kotlin.kapt") version "1.6.20"
     id("org.jetbrains.kotlin.plugin.allopen") version "1.6.10"
-    id("org.jetbrains.kotlin.plugin.jpa") version "1.6.10"
+    id("org.jetbrains.kotlin.plugin.jpa") version "1.6.20"
     id("com.github.johnrengelman.shadow") version "7.1.2"
     id("io.micronaut.application") version "3.3.2"
 }
@@ -20,7 +20,9 @@ dependencies {
     kapt("io.micronaut.data:micronaut-data-processor")
     kapt("io.micronaut.openapi:micronaut-openapi")
     kapt("io.micronaut.security:micronaut-security-annotations")
+    kapt("org.mapstruct:mapstruct-processor:1.5.0.RC1")
     implementation("io.micronaut:micronaut-http-client")
+    implementation("org.mapstruct:mapstruct:1.5.0.RC1")
     implementation("io.micronaut:micronaut-jackson-databind")
     implementation("io.micronaut:micronaut-runtime")
     implementation("io.micronaut.data:micronaut-data-hibernate-jpa")
@@ -34,6 +36,7 @@ dependencies {
     implementation("io.micronaut.sql:micronaut-jdbc-hikari")
     implementation("io.swagger.core.v3:swagger-annotations")
     implementation("jakarta.annotation:jakarta.annotation-api")
+    implementation("jakarta.persistence:jakarta.persistence-api")
     implementation("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
     runtimeOnly("ch.qos.logback:logback-classic")
@@ -48,8 +51,6 @@ dependencies {
     implementation("io.micronaut.views:micronaut-views-velocity")
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
     testImplementation("org.mockito:mockito-core")
-    implementation("org.mapstruct:mapstruct:1.4.2.Final")
-    annotationProcessor("org.mapstruct:mapstruct-processor:1.4.2.Final")
 }
 
 

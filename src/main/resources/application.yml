@@ -19,20 +19,27 @@ micronaut:
         mapping: /swagger-ui/**
   email:
     from:
-      email: annakrasowska2+sendgrid@gmail.com
-#datasources:
-#  default:
-#    url: jdbc:postgresql://localhost:5432/postgres
-#    driverClassName: org.postgresql.Driver
-#    username: postgres
-#    password: ''
-#    schema-generate: CREATE_DROP
-#    dialect: POSTGRES
-#jpa.default.properties.hibernate.hbm2ddl.auto: update
+      email: ${EMAIL_FROM:annakrasowska2+sendgrid@gmail.com}
+jpa:
+  default:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+        show_sql: true
+datasources:
+  default:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/email-microservice}
+    driverClassName: org.postgresql.Driver
+    username: ${DATABASE_USERNAME:email-microservice}
+    password: ${DATABASE_PASSWORD:anna}
+    schema-generate: CREATE_DROP
+    dialect: POSTGRES
+jpa.default.properties.hibernate.hbm2ddl.auto: update
 #kafka.bootstrap.servers: localhost:9092
 netty:
   default:
     allocator:
       max-order: 3
 sendgrid:
-  api-key: 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
+  api-key: ${SENDGRID_API_KEY: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}
