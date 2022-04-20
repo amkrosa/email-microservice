@@ -11,4 +11,5 @@ import org.reactivestreams.Publisher
 
 interface EmailApi {
     fun send(@Body sendEmailTemplateRequest: SendEmailTemplateRequest): Publisher<HttpResponse<*>>
+    fun getAll(): Publisher<HttpResponse<*>>
 }

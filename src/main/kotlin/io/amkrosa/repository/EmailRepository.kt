@@ -8,5 +8,5 @@ import io.micronaut.data.repository.reactive.ReactorCrudRepository
 import java.util.*
 
 @Repository
-interface EmailRepository : CrudRepository<Email, UUID> {
+interface EmailRepository : ReactorCrudRepository<Email, UUID> {
 }

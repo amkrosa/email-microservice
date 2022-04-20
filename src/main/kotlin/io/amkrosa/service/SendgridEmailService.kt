@@ -4,6 +4,7 @@ import com.sendgrid.Request
 import com.sendgrid.Response
 import io.amkrosa.mapper.Mappers
 import io.amkrosa.model.dto.SendEmailTemplateRequest
+import io.amkrosa.model.vo.EmailQueryParameters
 import io.amkrosa.repository.EmailRepository
 import io.amkrosa.rest.controller.EmailController
 import io.amkrosa.util.VelocityUtil
@@ -16,7 +17,9 @@ import io.micronaut.views.ModelAndView
 import jakarta.inject.Singleton
 import org.reactivestreams.Publisher
 import org.slf4j.LoggerFactory
+import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
+import java.util.*
 import javax.transaction.Transactional
 
 @Singleton
@@ -40,7 +43,8 @@ class SendgridEmailService(
             )
         )
             .doOnSuccess {
-                val email = Mappers.sendEmailRequestEmailEntityMapper.sendEmailTemplateRequestToEmail(sendEmailTemplateRequest)
+                val email =
+                    Mappers.sendEmailRequestEmailEntityMapper.sendEmailTemplateRequestToEmail(sendEmailTemplateRequest)
                 emailRepository.save(email)
             }
             .map { rsp: Response ->
@@ -49,6 +53,22 @@ class SendgridEmailService(
                     HttpResponse.accepted<Any>()
                 }
             }
+    }
+
+    override fun getAllEmails(): Publisher<HttpResponse<*>> {
+        return emailRepository.findAll()
+            .collectList()
+            .map { emailList: List<io.amkrosa.model.entity.Email> ->
+                HttpResponse.ok(emailList)
+            }
+    }
+
+    override fun getQueriedEmails(emailQueryParameters: EmailQueryParameters): Publisher<HttpResponse<*>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getEmail(emailUuid: UUID): Publisher<HttpResponse<*>> {
+        TODO("Not yet implemented")
     }
 
     companion object {
