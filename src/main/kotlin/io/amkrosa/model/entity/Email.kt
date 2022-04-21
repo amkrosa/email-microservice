@@ -1,5 +1,6 @@
 package io.amkrosa.model.entity
 
+import java.time.LocalDateTime
 import java.util.*
 import javax.annotation.processing.Generated
 import javax.persistence.*
@@ -14,4 +15,5 @@ class Email (
 ){
     @Id
     val uuid: UUID = UUID.randomUUID()
+    val dateTimeSent: LocalDateTime = LocalDateTime.now()
 }

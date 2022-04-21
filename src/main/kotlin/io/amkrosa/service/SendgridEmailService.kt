@@ -3,6 +3,8 @@ package io.amkrosa.service
 import com.sendgrid.Request
 import com.sendgrid.Response
 import io.amkrosa.mapper.Mappers
+import io.amkrosa.model.dto.GetEmailResponse
+import io.amkrosa.model.dto.GetEmailsResponse
 import io.amkrosa.model.dto.SendEmailTemplateRequest
 import io.amkrosa.model.vo.EmailQueryParameters
 import io.amkrosa.repository.EmailRepository
@@ -57,9 +59,12 @@ class SendgridEmailService(
 
     override fun getAllEmails(): Publisher<HttpResponse<*>> {
         return emailRepository.findAll()
+            .map { email: io.amkrosa.model.entity.Email ->
+                Mappers.getEmailEmailEntityMapper.emailEntityToGetEmailResponse(email)
+            }
             .collectList()
-            .map { emailList: List<io.amkrosa.model.entity.Email> ->
-                HttpResponse.ok(emailList)
+            .map { emailList: List<GetEmailResponse> ->
+                HttpResponse.ok(GetEmailsResponse(emailList))
             }
     }
 

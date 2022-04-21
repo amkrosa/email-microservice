@@ -1,6 +1,9 @@
 package io.amkrosa.model.dto
 
-import java.time.LocalDate
+import java.time.LocalDateTime
+import java.util.*
 
-//TODO - think of method to store html
-data class GetEmailResponse(val from: String, val to: String, val date: LocalDate, val html: String)
+data class GetEmailResponse(
+    val emailUuid: UUID, val subject: String, val toEmail: String,
+    val dateTimeSent: LocalDateTime, val html: String
+)
