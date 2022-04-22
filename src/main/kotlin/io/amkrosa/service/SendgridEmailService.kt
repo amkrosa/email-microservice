@@ -10,6 +10,7 @@ import io.amkrosa.model.vo.EmailQueryParameters
 import io.amkrosa.repository.EmailRepository
 import io.amkrosa.rest.controller.EmailController
 import io.amkrosa.util.VelocityUtil
+import io.amkrosa.util.capitalizeAndLowerCase
 import io.micronaut.email.AsyncEmailSender
 import io.micronaut.email.BodyType
 import io.micronaut.email.Email
@@ -39,7 +40,7 @@ class SendgridEmailService(
                     .body(
                         TemplateBody(
                             BodyType.HTML,
-                            ModelAndView(sendEmailTemplateRequest.template, sendEmailTemplateRequest.attributes)
+                            ModelAndView(sendEmailTemplateRequest.template.capitalizeAndLowerCase(), sendEmailTemplateRequest.attributes)
                         )
                     )
             )
