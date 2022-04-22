@@ -16,7 +16,7 @@ abstract class SendEmailRequestEmailEntityMapper {
 
     fun sendEmailTemplateRequestToEmail(sendEmailTemplateRequest: SendEmailTemplateRequest): Email {
         val html: String = velocityUtil.templateAsString(
-            sendEmailTemplateRequest.template.name,
+            sendEmailTemplateRequest.template,
             sendEmailTemplateRequest.attributes
         )
         return Email(sendEmailTemplateRequest.toEmail, sendEmailTemplateRequest.subject, html)

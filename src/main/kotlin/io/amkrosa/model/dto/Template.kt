@@ -1,5 +1,9 @@
 package io.amkrosa.model.dto
 
-enum class Template(name: String) {
-    REGISTRATION("Registration")
+enum class Template {
+    REGISTRATION;
+
+    companion object {
+        const val REGISTRATION_CONST = "REGISTRATION"
+    }
 }

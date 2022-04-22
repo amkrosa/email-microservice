@@ -39,7 +39,7 @@ class SendgridEmailService(
                     .body(
                         TemplateBody(
                             BodyType.HTML,
-                            ModelAndView(sendEmailTemplateRequest.template.name, sendEmailTemplateRequest.attributes)
+                            ModelAndView(sendEmailTemplateRequest.template, sendEmailTemplateRequest.attributes)
                         )
                     )
             )
@@ -47,7 +47,7 @@ class SendgridEmailService(
             .doOnSuccess {
                 val email =
                     Mappers.sendEmailRequestEmailEntityMapper.sendEmailTemplateRequestToEmail(sendEmailTemplateRequest)
-                emailRepository.save(email)
+                emailRepository.save(email).block()
             }
             .map { rsp: Response ->
                 if (rsp.statusCode >= 400) HttpResponse.unprocessableEntity()

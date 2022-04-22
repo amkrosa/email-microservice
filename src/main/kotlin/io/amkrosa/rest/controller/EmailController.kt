@@ -10,10 +10,13 @@ import io.micronaut.http.annotation.Get
 import io.micronaut.http.annotation.Post
 import io.micronaut.security.annotation.Secured
 import io.micronaut.security.rules.SecurityRule
+import io.micronaut.validation.Validated
 import org.reactivestreams.Publisher
 import org.slf4j.LoggerFactory
 import javax.transaction.Transactional
+import javax.validation.Valid
 
+@Validated
 @Secured(SecurityRule.IS_ANONYMOUS)
 @Controller("/email")
 class EmailController(
@@ -21,7 +24,7 @@ class EmailController(
 ) : EmailApi {
 
     @Post("/send")
-    override fun send(@Body sendEmailTemplateRequest: SendEmailTemplateRequest): Publisher<HttpResponse<*>> {
+    override fun send(@Valid @Body sendEmailTemplateRequest: SendEmailTemplateRequest): Publisher<HttpResponse<*>> {
         return emailService.sendTemplateEmail(sendEmailTemplateRequest)
     }
 
