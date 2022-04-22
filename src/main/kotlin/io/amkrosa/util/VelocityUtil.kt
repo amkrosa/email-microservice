@@ -13,7 +13,7 @@ class VelocityUtil(
     fun templateAsString(templateName: String, model: Map<String, Any>): String {
         val writer = StringWriter()
         val velocityContext = VelocityContext(model)
-        velocityFactory.velocityEngine.mergeTemplate("views/${templateName}.vm", "UTF-8", velocityContext, writer)
+        velocityFactory.velocityEngine.mergeTemplate("views/${templateName.capitalizeAndLowerCase()}.vm", "UTF-8", velocityContext, writer)
         return writer.toString()
     }
 }
