@@ -42,4 +42,4 @@ netty:
     allocator:
       max-order: 3
 sendgrid:
-  api-key: ${SENDGRID_API_KEY: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}
+  api-key: ${SENDGRID_API_KEY}
