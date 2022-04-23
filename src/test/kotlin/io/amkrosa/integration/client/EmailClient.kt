@@ -6,7 +6,7 @@ import io.micronaut.http.annotation.Body
 import io.micronaut.http.annotation.Get
 import io.micronaut.http.annotation.Post
 import io.micronaut.http.client.annotation.Client
-import org.reactivestreams.Publisher
+import org.zalando.problem.Problem
 import reactor.core.publisher.Mono
 
 @Client("/")
@@ -17,4 +17,7 @@ interface EmailClient {
 
     @Post("/email/send")
     fun sendEmail(@Body sendEmailTemplateRequest: SendEmailTemplateRequest)
+
+    @Post("/email/send")
+    fun sendEmailWithProblem(@Body sendEmailTemplateRequest: SendEmailTemplateRequest): Problem
 }
