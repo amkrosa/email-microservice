@@ -19,7 +19,7 @@ micronaut:
         mapping: /swagger-ui/**
   email:
     from:
-      email: ${EMAIL_FROM:annakrasowska2+sendgrid@gmail.com}
+      email: ${EMAIL_FROM:annakrasowska2+mailjet@gmail.com}
 jpa:
   default:
     properties:
@@ -41,5 +41,6 @@ netty:
   default:
     allocator:
       max-order: 3
-sendgrid:
-  api-key: ${SENDGRID_API_KEY}
+mailjet:
+  api-key: ${MAILJET_API_KEY}
+  api-secret: ${MAILJET_API_SECRET}

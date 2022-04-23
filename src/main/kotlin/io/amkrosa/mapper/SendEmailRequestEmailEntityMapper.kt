@@ -4,10 +4,8 @@ import io.amkrosa.model.dto.SendEmailTemplateRequest
 import io.amkrosa.model.entity.Email
 import io.amkrosa.util.VelocityUtil
 import io.micronaut.views.velocity.VelocityFactory
-import jakarta.inject.Inject
-import jakarta.inject.Singleton
-import org.mapstruct.*
-import java.util.*
+import org.mapstruct.Mapper
+import org.mapstruct.MappingConstants
 
 @Mapper(componentModel = MappingConstants.ComponentModel.JAKARTA)
 abstract class SendEmailRequestEmailEntityMapper {
@@ -19,6 +17,6 @@ abstract class SendEmailRequestEmailEntityMapper {
             sendEmailTemplateRequest.template,
             sendEmailTemplateRequest.attributes
         )
-        return Email(sendEmailTemplateRequest.toEmail, sendEmailTemplateRequest.subject, html)
+        return Email(sendEmailTemplateRequest.toEmail!!, sendEmailTemplateRequest.subject!!, html)
     }
 }

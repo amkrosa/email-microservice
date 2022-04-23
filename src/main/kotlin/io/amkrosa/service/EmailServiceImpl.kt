@@ -1,7 +1,7 @@
 package io.amkrosa.service
 
-import com.sendgrid.Request
-import com.sendgrid.Response
+import com.mailjet.client.MailjetRequest
+import com.mailjet.client.MailjetResponse
 import io.amkrosa.mapper.Mappers
 import io.amkrosa.model.dto.GetEmailResponse
 import io.amkrosa.model.dto.GetEmailsResponse
@@ -9,7 +9,6 @@ import io.amkrosa.model.dto.SendEmailTemplateRequest
 import io.amkrosa.model.vo.EmailQueryParameters
 import io.amkrosa.repository.EmailRepository
 import io.amkrosa.rest.controller.EmailController
-import io.amkrosa.util.VelocityUtil
 import io.amkrosa.util.capitalizeAndLowerCase
 import io.micronaut.email.AsyncEmailSender
 import io.micronaut.email.BodyType
@@ -20,14 +19,12 @@ import io.micronaut.views.ModelAndView
 import jakarta.inject.Singleton
 import org.reactivestreams.Publisher
 import org.slf4j.LoggerFactory
-import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 import java.util.*
-import javax.transaction.Transactional
 
 @Singleton
-class SendgridEmailService(
-    private val emailSender: AsyncEmailSender<Request, Response>,
+class EmailServiceImpl(
+    private val emailSender: AsyncEmailSender<MailjetRequest, MailjetResponse>,
     private val emailRepository: EmailRepository,
 ) : EmailService {
 
@@ -40,7 +37,10 @@ class SendgridEmailService(
                     .body(
                         TemplateBody(
                             BodyType.HTML,
-                            ModelAndView(sendEmailTemplateRequest.template.capitalizeAndLowerCase(), sendEmailTemplateRequest.attributes)
+                            ModelAndView(
+                                sendEmailTemplateRequest.template?.capitalizeAndLowerCase(),
+                                sendEmailTemplateRequest.attributes
+                            )
                         )
                     )
             )
@@ -50,8 +50,8 @@ class SendgridEmailService(
                     Mappers.sendEmailRequestEmailEntityMapper.sendEmailTemplateRequestToEmail(sendEmailTemplateRequest)
                 emailRepository.save(email).block()
             }
-            .map { rsp: Response ->
-                if (rsp.statusCode >= 400) HttpResponse.unprocessableEntity()
+            .map { rsp ->
+                if (rsp.status >= 400) HttpResponse.unprocessableEntity()
                 else {
                     HttpResponse.accepted<Any>()
                 }

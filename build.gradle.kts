@@ -45,8 +45,9 @@ dependencies {
     testImplementation("org.testcontainers:junit-jupiter")
     testImplementation("org.testcontainers:postgresql")
     testImplementation("org.testcontainers:testcontainers")
+    implementation("org.junit.jupiter:junit-jupiter-params")
     implementation("io.micronaut:micronaut-validation")
-    implementation("io.micronaut.email:micronaut-email-sendgrid")
+    implementation("io.micronaut.email:micronaut-email-mailjet")
     implementation("io.micronaut.email:micronaut-email-template")
     implementation("io.micronaut.views:micronaut-views-velocity")
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
@@ -82,5 +83,3 @@ micronaut {
         annotations("io.amkrosa.*")
     }
 }
-
-
