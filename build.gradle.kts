@@ -50,6 +50,7 @@ dependencies {
     implementation("io.micronaut.email:micronaut-email-mailjet")
     implementation("io.micronaut.email:micronaut-email-template")
     implementation("io.micronaut.views:micronaut-views-velocity")
+    implementation("io.micronaut.kafka:micronaut-kafka")
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
     testImplementation("org.mockito:mockito-core")
 }

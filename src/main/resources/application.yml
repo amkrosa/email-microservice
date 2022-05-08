@@ -20,6 +20,12 @@ micronaut:
   email:
     from:
       email: ${EMAIL_FROM:annakrasowska2+mailjet@gmail.com}
+  server:
+    cors:
+      enabled: true
+kafka:
+  bootstrap:
+    servers: 51.38.132.138:9092
 jpa:
   default:
     properties:
