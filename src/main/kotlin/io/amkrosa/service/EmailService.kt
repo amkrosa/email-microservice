@@ -11,4 +11,5 @@ interface EmailService {
     fun getAllEmails(): Publisher<HttpResponse<*>>
     fun getQueriedEmails(emailQueryParameters: EmailQueryParameters): Publisher<HttpResponse<*>>
     fun getEmail(emailUuid: UUID): Publisher<HttpResponse<*>>
+    fun getTemplates(): HttpResponse<*>
 }

@@ -13,7 +13,6 @@ import io.micronaut.security.rules.SecurityRule
 import io.micronaut.validation.Validated
 import org.reactivestreams.Publisher
 import org.slf4j.LoggerFactory
-import javax.transaction.Transactional
 import javax.validation.Valid
 
 @Validated
@@ -31,6 +30,11 @@ class EmailController(
     @Get("/all")
     override fun getAll(): Publisher<HttpResponse<*>> {
         return emailService.getAllEmails()
+    }
+
+    @Get("/templates")
+    override fun getTemplates(): HttpResponse<*> {
+        return emailService.getTemplates()
     }
 
     companion object {

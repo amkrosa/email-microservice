@@ -5,6 +5,7 @@ import com.mailjet.client.MailjetResponse
 import io.amkrosa.mapper.Mappers
 import io.amkrosa.model.dto.GetEmailResponse
 import io.amkrosa.model.dto.GetEmailsResponse
+import io.amkrosa.model.dto.GetTemplatesResponse
 import io.amkrosa.model.dto.SendEmailTemplateRequest
 import io.amkrosa.model.vo.EmailQueryParameters
 import io.amkrosa.repository.EmailRepository
@@ -75,6 +76,10 @@ class EmailServiceImpl(
 
     override fun getEmail(emailUuid: UUID): Publisher<HttpResponse<*>> {
         TODO("Not yet implemented")
+    }
+
+    override fun getTemplates(): HttpResponse<*> {
+        return HttpResponse.ok(GetTemplatesResponse())
     }
 
     companion object {
