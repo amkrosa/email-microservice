@@ -5,3 +5,5 @@ datasources:
 micronaut:
   server:
     port: 8080
+  security:
+    enabled: false

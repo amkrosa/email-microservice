@@ -17,9 +17,9 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 import org.slf4j.LoggerFactory
 
-@MicronautTest(packages = ["io.amkrosa"])
+@MicronautTest(environments = ["mock"], packages = ["io.amkrosa"])
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class ApiIT {
+class ApiTest {
 
     private val EMAIL_REQUEST_FIELDS = object {
         val SUBJECT: String = "Test"
