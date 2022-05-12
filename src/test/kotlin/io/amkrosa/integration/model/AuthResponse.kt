@@ -10,4 +10,7 @@ data class AuthResponse(
     val tokenType: String,
     val expiresIn: Int
 ) {
+    fun bearerToken(): String {
+        return "${tokenType}: ${accessToken}"
+    }
 }

@@ -10,6 +10,7 @@ import io.micronaut.security.authentication.UsernamePasswordCredentials
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
 import jakarta.inject.Inject
 import org.assertj.core.api.Assertions
+import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.params.ParameterizedTest
@@ -31,11 +32,13 @@ class AuthTest {
     @Inject
     lateinit var emailUserRepository: EmailUserRepository
 
+    @BeforeAll
+    fun userSetup() {
+        emailUserRepository.save(EmailUser(CORRECT_USER, CORRECT_PASSWORD)).block()
+    }
+
     @Test
     fun shouldLoginWithProperPassword() {
-        //given
-        emailUserRepository.save(EmailUser(CORRECT_USER, CORRECT_PASSWORD)).block()
-
         //when
         val response = authClient.getToken(UsernamePasswordCredentials(CORRECT_USER, CORRECT_PASSWORD))?.block()
 
@@ -61,6 +64,21 @@ class AuthTest {
             )
         }
             .hasMessage(error)
+    }
+
+    @Test
+    fun shouldAccessProtectedEndpointWithToken() {
+        //given
+        val token =
+            authClient.getToken(UsernamePasswordCredentials(CORRECT_USER, CORRECT_PASSWORD))?.block()?.bearerToken()
+
+        //when & then
+        Assertions.assertThatNoException().isThrownBy { emailClient.getAllEmailsWithAuth(token!!) }
+    }
+
+    @Test
+    fun shouldNotAccessProtectedEndpointWithoutToken() {
+        //TODO
     }
 
     companion object {
