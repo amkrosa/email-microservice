@@ -10,7 +10,7 @@ micronaut:
             generator:
               secret: '"${JWT_GENERATOR_SIGNATURE_SECRET:pleaseChangeThisSecretForANewOne}"'
 
-    enabled: ${SECURITY_ENABLED:false}
+    enabled: ${SECURITY_ENABLED:true}
   router:
     static-resources:
       swagger:
@@ -27,13 +27,13 @@ micronaut:
       enabled: true
 kafka:
   bootstrap:
-    servers: 51.38.132.138:9092
+    servers: ${KAFKA_SERVER}
 jpa:
   default:
     properties:
       hibernate:
         hbm2ddl:
-          auto: create-drop
+          auto: update
         show_sql: true
 datasources:
   default:
@@ -41,7 +41,7 @@ datasources:
     driverClassName: org.postgresql.Driver
     username: ${DATABASE_USERNAME:email-microservice}
     password: ${DATABASE_PASSWORD:anna}
-    schema-generate: CREATE_DROP
+    schema-generate: UPDATE
     dialect: POSTGRES
 jpa.default.properties.hibernate.hbm2ddl.auto: update
 #kafka.bootstrap.servers: localhost:9092
