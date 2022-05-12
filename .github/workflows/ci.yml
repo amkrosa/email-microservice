@@ -29,5 +29,10 @@ jobs:
           distribution: 'temurin'
       - name: Build with Gradle
         uses: gradle/gradle-build-action@0d13054264b0bb894ded474f08ebb30921341cee
+        env:
+          KAFKA_SERVER: ${{ secrets.KAFKA_SERVER }}
+          MAILJET_API_KEY: ${{ secrets.MAILJET_API_KEY }}
+          MAILJET_API_SECRET: ${{ secrets.MAILJET_API_SECRET }}
+          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
         with:
           arguments: build --scan --info --stacktrace
