@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory
 import javax.validation.Valid
 
 @Validated
-@Secured(SecurityRule.IS_ANONYMOUS)
+@Secured(SecurityRule.IS_AUTHENTICATED)
 @Controller("/email")
 class EmailController(
     private val emailService: EmailService
