@@ -10,9 +10,13 @@ plugins {
 version = "0.1"
 group = "io.amkrosa"
 
-val kotlinVersion=project.properties.get("kotlinVersion")
+val kotlinVersion = project.properties.get("kotlinVersion")
 repositories {
     mavenCentral()
+}
+
+tasks.create("stage") {
+    dependsOn("installDist")
 }
 
 dependencies {
