@@ -28,6 +28,7 @@ micronaut:
   server:
     cors:
       enabled: true
+    port: ${PORT:8080}
 kafka:
   enabled: ${KAFKA_ENABLED:true}
   bootstrap:
