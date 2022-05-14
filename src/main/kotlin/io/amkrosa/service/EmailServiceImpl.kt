@@ -56,7 +56,7 @@ class EmailServiceImpl(
     }
 
     override fun getAllEmails(): Publisher<HttpResponse<*>> {
-        return emailRepository.findAll()
+        return emailRepository.listOrderByDateTimeSentDesc()
             .map { email: io.amkrosa.model.entity.Email ->
                 Mappers.getEmailEmailEntityMapper.emailEntityToGetEmailResponse(email)
             }
