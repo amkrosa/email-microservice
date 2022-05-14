@@ -40,7 +40,6 @@ jpa:
         show_sql: true
 datasources:
   default:
-    #jdbc:postgresql://@ec2-52-212-228-71.eu-west-1.compute.amazonaws.com:5432/d4ttut7bh5f32q
     url: ${DATABASE_JDBC_URL:jdbc:postgresql://localhost:5432/email-microservice}
     driverClassName: org.postgresql.Driver
     username: ${DATABASE_USERNAME:email-microservice}
