@@ -66,7 +66,7 @@ class ApiTest {
         Assertions.assertThat(response)
             .isNotEmpty()
             .hasOnlyElementsOfType(GetEmailResponse::class.java)
-            .element(0)
+            .element(response?.size?.minus(1) ?: 0)
             .extracting("subject", "toEmail", "html")
             .contains(
                 sendEmailTemplateRequest.subject,
