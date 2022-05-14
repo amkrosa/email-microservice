@@ -36,3 +36,23 @@ jobs:
           EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
         with:
           arguments: build --scan --info --stacktrace
+  deploy:
+    runs-on: self-hosted
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - name: Development Code
+        uses: actions/checkout@v2
+      - name: Deploy to Heroku
+        uses: akhileshns/heroku-deploy@v3.12.12
+        env:
+          KAFKA_SERVER: ${{ secrets.KAFKA_SERVER }}
+          MAILJET_API_KEY: ${{ secrets.MAILJET_API_KEY }}
+          MAILJET_API_SECRET: ${{ secrets.MAILJET_API_SECRET }}
+          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+          DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
+          DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: 'io-dev-api-email'
+          heroku_email: 'annakrasowska2@gmail.com'
