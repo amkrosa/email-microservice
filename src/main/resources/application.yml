@@ -29,6 +29,7 @@ micronaut:
     cors:
       enabled: true
 kafka:
+  enabled: ${KAFKA_ENABLED:true}
   bootstrap:
     servers: ${KAFKA_SERVER:localhost:9092}
 jpa:
