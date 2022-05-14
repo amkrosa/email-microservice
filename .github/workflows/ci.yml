@@ -37,6 +37,8 @@ jobs:
         with:
           arguments: build --scan --info --stacktrace
   deploy:
+    needs:
+      - build_and_test
     runs-on: self-hosted
     if: github.ref == 'refs/heads/master'
     steps:
@@ -56,3 +58,4 @@ jobs:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: 'io-dev-api-email'
           heroku_email: 'annakrasowska2@gmail.com'
+          usedocker: true
