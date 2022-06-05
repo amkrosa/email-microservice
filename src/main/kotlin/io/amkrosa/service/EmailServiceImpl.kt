@@ -1,5 +1,6 @@
 package io.amkrosa.service
 
+import com.mailjet.client.MailjetResponse
 import io.amkrosa.client.email.EmailSender
 import io.amkrosa.mapper.Mappers
 import io.amkrosa.model.dto.GetEmailResponse
@@ -23,7 +24,7 @@ import java.util.*
 
 @Singleton
 class EmailServiceImpl(
-    private val emailSender: EmailSender<HttpRequest<*>, HttpResponse<*>>,
+    private val emailSender: EmailSender<HttpRequest<*>, MailjetResponse>,
     private val emailRepository: EmailRepository,
 ) : EmailService {
 
@@ -48,7 +49,7 @@ class EmailServiceImpl(
                 emailRepository.save(email).block()
             }
             .map { rsp ->
-                if (rsp.status.code >= 400) HttpResponse.unprocessableEntity()
+                if (rsp.status >= 400) HttpResponse.unprocessableEntity()
                 else {
                     HttpResponse.accepted<Any>()
                 }

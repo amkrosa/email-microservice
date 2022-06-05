@@ -34,7 +34,7 @@ class ApiTest {
     @Inject
     lateinit var velocityUtil: VelocityUtil
 
-    val sendEmailTemplateRequest = sampleSendEmailTemplateRequest(1)
+    val sendEmailTemplateRequest = sampleSendEmailTemplateRequest(2)
 
     @BeforeAll
     fun setup() {
